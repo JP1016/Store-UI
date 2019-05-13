@@ -6,14 +6,19 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { OrderResponse } from 'src/app/shared/models/orders.model';
+import { AppConstants } from 'src/app/configs/app-constants';
+
+import {
+  MatSnackBar
+} from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpClientService {
   serviceBasePath = `${environment.serviceEndpoint}`;
- 
-  constructor(private http: HttpClient, private router: Router) {
+
+  constructor(private http: HttpClient, private router: Router,private snackBar: MatSnackBar) {
   }
 
   listOrders(page:Number=0,size:Number=10,sortValue:String='',sortOrder:String='ASC',searchTerm:String=''){
@@ -38,7 +43,11 @@ export class HttpClientService {
     let errMsg: string;
     if (error instanceof HttpErrorResponse) {
       try {
-        if (showToast && error.status !== 401 && error.status !== 403) {
+        if (showToast && error.status !== 401 && error.status !== 403 && this.snackBar) {
+        
+          this.snackBar.open(AppConstants.SERVER_ERROR, 'OK', {
+            duration: AppConstants.ERROR_DURATION * 1000,
+          });
         }
         const err = JSON.stringify(error);
         errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
