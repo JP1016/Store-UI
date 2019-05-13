@@ -1,12 +1,14 @@
 <app-search-bar (searchTrigger)="searchInput($event.target.value)"></app-search-bar>
-<div class="heading-container container my-2">
+<div class="heading-container container my-2" >
 <h5 class="heading">
   Orders
 </h5>
 <button mat-raised-button color="primary" [routerLink]="['cart']">Place Order</button>
-
 </div>
-<div class="mat-elevation-z8 container">
+<div *ngIf="length==0">
+  <h4 class="center">No Orders to display!!</h4>
+</div>
+<div class="mat-elevation-z8 container" [hidden]="length==0">
   <mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
 
     <ng-container matColumnDef="orderProduct">

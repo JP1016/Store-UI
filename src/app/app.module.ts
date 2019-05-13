@@ -19,7 +19,6 @@ import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientService } from './core/services/http-client.service';
 import { CoreModule } from './core/core.module';
-import { OrdersModule } from './modules/orders/orders.module';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
