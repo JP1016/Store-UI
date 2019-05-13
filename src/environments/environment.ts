@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  serviceEndpoint: 'http://localhost:9001/api'
+  orderServiceEndpoint: 'http://localhost:9001/api',
+  userServiceEndpoint: 'http://localhost:9002/api'
 };
 
 /*

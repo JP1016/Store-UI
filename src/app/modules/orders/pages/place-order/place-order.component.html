@@ -1,34 +1,63 @@
 <div class="container center">
-<form [formGroup]="orderForm"  (ngSubmit)="onSubmit()">
-  
-  <div>
-  <label>
-    User:
-    <input class="form-control" type="text" formControlName="userId">
-  </label>
-</div>
-<div>
+  <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
 
-  <label>
-    Order Code:
-    <input class="form-control" type="text" formControlName="orderCode">
-  </label>
-</div>
-<div>
+    <div>
+      <div>
+        <label>
 
-  <label>
-    Order Product:
-    <input class="form-control" type="text" formControlName="orderProduct">
-  </label>
-</div>
-<div>
+          User ID:
+        </label></div>
 
-  <label>
-    Order Description:
-    <input class="form-control" type="text" formControlName="orderDescription">
-  </label>
-</div>
-  <button type="submit" class="btn btn-primary" [disabled]="!orderForm.valid">Submit</button>
+      <mat-form-field>
+        <input matInput type="text" formControlName="userId" [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option.id"
+            (selectionChange)="selectUser($event.value)">
+            {{option.firstName}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    <div>
 
-</form>
+      <label>
+        <div>
+          Order Code:
+        </div>
+        <mat-form-field>
+
+          <input matInput class="form-control" type="text" formControlName="orderCode">
+        </mat-form-field>
+
+      </label>
+    </div>
+    <div>
+
+      <label>
+        <div>
+          Order Product:
+        </div>
+        <mat-form-field>
+
+          <input matInput class="form-control" type="text" formControlName="orderProduct">
+        </mat-form-field>
+      </label>
+    </div>
+    <div>
+
+      <label>
+        <div>
+          Order Description:
+        </div>
+        <mat-form-field>
+
+          <input matInput type="text" formControlName="orderDescription">
+        </mat-form-field>
+      </label>
+    </div>
+
+    <button type="submit" mat-raised-button color="accent" [disabled]="!orderForm.valid">Submit</button>
+
+
+  </form>
 </div>

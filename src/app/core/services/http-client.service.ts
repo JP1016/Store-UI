@@ -16,13 +16,14 @@ import {
   providedIn: 'root'
 })
 export class HttpClientService {
-  serviceBasePath = `${environment.serviceEndpoint}`;
+  orderServiceBasePath = `${environment.orderServiceEndpoint}`;
+  userServiceBasePath = `${environment.userServiceEndpoint}`;
 
   constructor(private http: HttpClient, private router: Router,private snackBar: MatSnackBar) {
   }
 
   listOrders(page:Number=0,size:Number=10,sortValue:String='',sortOrder:String='ASC',searchTerm:String=''){
-    return this.http.get<OrderResponse>(`${this.serviceBasePath}/orders/list?page=${page}&size=${size}&sortValue=${sortValue}&sortOrder=${sortOrder}&searchKey=${searchTerm}`)
+    return this.http.get<OrderResponse>(`${this.orderServiceBasePath}/orders/list?page=${page}&size=${size}&sortValue=${sortValue}&sortOrder=${sortOrder}&searchKey=${searchTerm}`)
       .pipe(
         catchError((result) => {
           return this.handleError(result);
@@ -31,7 +32,16 @@ export class HttpClientService {
   }
 
   placeOrder(orderData){
-    return this.http.post(`${this.serviceBasePath}/orders`,orderData)
+    return this.http.post(`${this.orderServiceBasePath}/orders`,orderData)
+    .pipe(
+      catchError((result) => {
+        return this.handleError(result);
+      })
+    );
+  }
+
+  getUsersByName(name:String){
+    return this.http.get(`${this.userServiceBasePath}/users/name/${name}`)
     .pipe(
       catchError((result) => {
         return this.handleError(result);

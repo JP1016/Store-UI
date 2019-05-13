@@ -11,7 +11,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { MatSortModule } from '@angular/material';
+import { MatSortModule, MatAutocompleteModule, MatFormFieldModule } from '@angular/material';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 
@@ -37,7 +37,11 @@ import { PlaceOrderComponent } from './pages/place-order/place-order.component';
     ReactiveFormsModule,
     SharedModule,
     OrdersRoutingModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule
   ],
   exports:[HomeComponent]
 })
